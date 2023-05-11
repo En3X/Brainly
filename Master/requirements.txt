@@ -1,0 +1,7 @@
+PySide2~=5.15.2.1
+pynput~=1.7.6
+pyfirmata~=1.1.0
+pyfiglet~=0.8.post1
+qtawesome
+numpy
+opencv-python~=4.5.5.62

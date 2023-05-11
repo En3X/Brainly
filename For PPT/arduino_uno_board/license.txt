@@ -1,0 +1,11 @@
+Model Information:
+* title:	Arduino Uno Board
+* source:	https://sketchfab.com/3d-models/arduino-uno-board-f31feafc5e9743abbdf33c54f9d92669
+* author:	crimsonfalcon (https://sketchfab.com/crimsonfalcon)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Arduino Uno Board" (https://sketchfab.com/3d-models/arduino-uno-board-f31feafc5e9743abbdf33c54f9d92669) by crimsonfalcon (https://sketchfab.com/crimsonfalcon) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
