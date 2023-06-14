@@ -2,6 +2,9 @@ PySide2~=5.15.2.1
 pynput~=1.7.6
 pyfirmata~=1.1.0
 pyfiglet~=0.8.post1
-qtawesome
+qtawesome~=1.2.3
 numpy
 opencv-python~=4.5.5.62
+Pillow~=9.5.0
+tkfontawesome~=0.2.0
+cvzone~=1.5.6

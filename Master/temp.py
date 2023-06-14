@@ -76,6 +76,7 @@ if __name__ == '__main__':
         # pin6.write(0)
         # car.pass_time(1)
 
+
     def topLeft():
         # print("Going Left")
         set_motor_direction(6)
@@ -84,6 +85,7 @@ if __name__ == '__main__':
         pin5.write(1)
         pin6.write(1)
 
+
     def topRight():
         # print("Going Left")
         set_motor_direction(5)
@@ -91,6 +93,8 @@ if __name__ == '__main__':
         pin3.write(1)
         pin5.write(1)
         pin6.write(1)
+
+
     def stop(key):
         set_motor_direction(7)
         pin11.write(0)
@@ -98,15 +102,14 @@ if __name__ == '__main__':
         pin5.write(0)
         pin6.write(0)
 
+
     #
     # forward()
     # backward()
     # left()
     # right()
 
-
     def keyboard_listener(key):
-        print("Key pressed",key)
         if key == keyboard.Key.up or key == "w":
             print("Going forward")
             forward()
@@ -133,7 +136,7 @@ if __name__ == '__main__':
             pass
 
 
-    with keyboard.Listener(on_press=keyboard_listener,on_release=stop) as listener:
+    with keyboard.Listener(on_press=keyboard_listener, on_release=stop) as listener:
         listener.join()
 
     # while True:
