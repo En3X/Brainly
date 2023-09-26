@@ -9,14 +9,12 @@ import pyaudio
 from vosk import Model, KaldiRecognizer
 from pyaudio import PyAudio
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     gui = TKGUI.TKGUI()
     IS_CAR_RUNNING = False
 
-
     def start_mainloop():
         gui.mainloop()
-
 
     def log(log_type, log_text):
         log_text = str(log_text)
@@ -32,10 +30,8 @@ if __name__ == '__main__':
         new_log = "\n".join(logs_controller)
         gui.logs.config(text=new_log)
 
-
     car = None
     video = None
-
 
     def initialize_car():
         global IS_CAR_RUNNING
@@ -51,36 +47,34 @@ if __name__ == '__main__':
             print(e)
             log("ERROR", e)
 
-
     def enableMannualMode():
         if car != None:
-            stop('q')
+            stop("q")
         gui.setMannualMode()
-
 
     def enableSelfDrivingMode():
         if car != None:
-            stop('q')
+            stop("q")
         gui.setSelfDrivingMode()
-
 
     def enableVoiceControlMode():
         if car != None:
-            stop('q')
+            stop("q")
         gui.setVoiceControlMode()
-
 
     def on_key_press(key):
         # print("Key pressed", key)
         if not IS_CAR_RUNNING:
-            log("WARNING", "The bluetooth module is still loading and the car is not connected yet")
+            log(
+                "WARNING",
+                "The bluetooth module is still loading and the car is not connected yet",
+            )
             return
 
         if gui.DRIVING_MODE != "MANNUAL":
             enableMannualMode()
 
         try:
-
             if key == keyboard.Key.up:
                 gui.up_btn.configure(background="white", foreground="#292C3C")
                 car.forward()
@@ -93,13 +87,11 @@ if __name__ == '__main__':
                 log("COMMAND", "Going Back")
                 # ui.down.setStyleSheet("background-color: #DCF7D0;border: 1px solid #DCF7D0;")
 
-
             elif key == keyboard.Key.right:
                 gui.right_btn.configure(background="white", foreground="#292C3C")
                 car.topRight()
                 log("COMMAND", "Going top right")
                 # ui.right.setStyleSheet("background-color: #DCF7D0;border: 1px solid #DCF7D0;")
-
 
             elif key == keyboard.Key.left:
                 gui.left_btn.configure(background="white", foreground="#292C3C")
@@ -112,7 +104,6 @@ if __name__ == '__main__':
 
         except Exception as e:
             print(e)
-
 
     def stop(key):
         if not IS_CAR_RUNNING:
@@ -127,19 +118,17 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
 
-
     def setup_listener():
         listener = keyboard.Listener(on_press=on_key_press, on_release=stop)
         listener.start()
         log("INFO", "Keyboard controller activated")
 
-
     def show_video_footage():
         try:
             video = VideoControl.VideoController()
-            ret, img, canny, direction = video.getVideo()
+            img, direction = video.getVideoTwo()
             camera_holder_label = gui.camera_holder_label
-            if (img is not None):
+            if img is not None:
                 photo = ImageTk.PhotoImage(image=Image.fromarray(img))
                 camera_holder_label.imgtk = photo
                 camera_holder_label.configure(image=photo)
@@ -154,7 +143,7 @@ if __name__ == '__main__':
                     elif direction == "straight":
                         car.forward()
                     else:
-                        stop('q')
+                        stop("q")
 
             else:
                 print("No frame detected")
@@ -163,8 +152,8 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
 
-
     def activate_voice_control_mode():
+        return  # remove this if voice control thread is needed
         while True:
             if gui.DRIVING_MODE != "VOICE" and car == None:
                 pass
@@ -172,12 +161,17 @@ if __name__ == '__main__':
                 # speech_recognizer = sr.Recognizer()
                 # with sr.Microphone() as source:
                 try:
-                    model = Model("E:\\Programming\\Project\\Master\\classes\\model")
+                    model = Model("F:\\Programming\\Project\\Master\\classes\\model")
                     sr = KaldiRecognizer(model, 16000)
 
                     mic = PyAudio()
-                    stream = mic.open(format=pyaudio.paInt16, channels=1, rate=16000, input=True,
-                                      frames_per_buffer=8192)
+                    stream = mic.open(
+                        format=pyaudio.paInt16,
+                        channels=1,
+                        rate=16000,
+                        input=True,
+                        frames_per_buffer=8192,
+                    )
 
                     print("Listening")
                     while True:
@@ -187,33 +181,30 @@ if __name__ == '__main__':
                             text = text[14:-3]
                             print(text)
 
-                            cmd= text
+                            cmd = text
 
                             if gui.DRIVING_MODE != "VOICE":
                                 break
 
                             if "go" in cmd:
-                                stop('q')
+                                stop("q")
                                 car.forward()
                             elif "stop" in cmd:
-                                stop('a')
+                                stop("a")
                             elif "back" in cmd:
-                                stop('q')
+                                stop("q")
                                 car.backward()
                             elif "left" in cmd:
-                                stop('q')
+                                stop("q")
                                 car.topLeft()
                             elif "right" in cmd:
-                                stop('q')
+                                stop("q")
                                 car.topRight()
 
                 except Exception as e:
-                    log("VOICE ERROR",e)
-
-
+                    log("VOICE ERROR", e)
 
     # def Listen():
-
 
     # setup_listener()
     video_thread = Thread(target=show_video_footage)
@@ -221,7 +212,7 @@ if __name__ == '__main__':
     car_thread = Thread(target=initialize_car)
     voice_thread = Thread(target=activate_voice_control_mode)
 
-    video_thread.start()
+    # video_thread.start()
     car_thread.start()
     voice_thread.start()
     listener_thread.start()

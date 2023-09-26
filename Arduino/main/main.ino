@@ -1,17 +1,4 @@
-/*
-Code Name: Arduino Bluetooth Car with Front and Back Light Control 
-Code URI: https://circuitbest.com/category/arduino-projects/
-Before uploading the code you have to install the "Adafruit Motor Shield" library
-Open Arduino IDE >> Go to sketch >> Include Libray >> Manage Librays...  >> Search "Adafruit Motor Shield" >> Install the Library
-AFMotor Library: https://learn.adafruit.com/adafruit-motor-shield/library-install
-Author: Make DIY
-Author URI: https://circuitbest.com/author/admin/
-Description: This program is used to control a robot using an app that communicates with Arduino through an HC-05 Bluetooth Module.
-App URI: https://bit.ly/3mn6LuZ
-Version: 1.0
-License: Remixing or Changing this Thing is allowed. Commercial use is not allowed.
-*/
-  
+
 #include <AFMotor.h>
   
 //initial motors pin
@@ -21,7 +8,7 @@ AF_DCMotor motor3(3, MOTOR34_1KHZ);
 AF_DCMotor motor4(4, MOTOR34_1KHZ);
   
 int val;
-int Speeed = 255;
+int Speeed = 100;
   
 void setup()
 {
@@ -47,10 +34,14 @@ void loop(){
   
           if (val == 'A'){
           back();
+          Serial.print("W Pressed");
+
           }
   
           if (val == 'S'){
           left();
+          Serial.print("W Pressed");
+
           }
   
           if (val == 'D'){

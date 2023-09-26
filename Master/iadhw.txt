@@ -1,0 +1,37 @@
+Database
+    - User
+        . ID
+        . Name
+        . Address
+        . email
+        . password
+        .ph
+        . balance (integer, float) // add this field
+
+
+When user creates account
+    . ID - Auto generate
+    . Name - From user input
+    . Address - From user input
+    . email - From user input
+    . password - From user input
+    . ph - From user input
+    . balance = 0
+
+
+Make a page called addbalance
+    - user inputs amount
+    - when submit btn is clicked, newblance = oldbalance + userinput
+    - oldbalance = database balance (auth.user.balance)
+    - calculated new balance is updated on database
+        . user.update(name), user.update(balance)
+
+When making purchase
+    - Check if user has enough balance i.e. balance >= purchasing amount
+        - if yes
+            - balance update in database, i.e. newbalance = balance - purchasing amount
+            - purchase log update with new value
+                - id, product_id, user_id, amount
+            - Purchase successful
+        - if no
+            - Purchase failed, you do not have enough balance
